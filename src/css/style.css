@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+:root {
+    /* Palette */
+    --palette-green-dark: #143109;
+    --palette-green-mid: #AAAE7F;
+    --palette-green-light: #D0D6B3;
+    --palette-neutral-light: #F7F7F7;
+    --palette-neutral-base: #EFEFEF;
+
+    /* Backgrounds */
+    --background-body: var(--palette-neutral-light);
+    --background-subtle: var(--palette-neutral-base);
+    --background-accent: var(--palette-green-light);
+    --background-inverse: var(--palette-green-dark);
+
+    /* Text */
+    --text-primary: var(--palette-green-dark);
+    --text-secondary: var(--palette-green-mid);
+    --text-on-inverse: var(--palette-neutral-light); /* Text on a dark background */
+
+    /* Borders & Dividers */
+    --border-subtle: var(--palette-green-light);
+    --border-strong: var(--palette-green-mid);
+
+    /* UI Accents & Calls to Action */
+    --accent-primary: var(--palette-green-mid);
+    --accent-primary-hover: var(--palette-green-dark);
+    --accent-secondary: var(--palette-green-light);
+
+    /* FONT WEIGHTS */
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-bold: 700;
+
+    /* LINE HEIGHTS (Unitless values are best practice) */
+    --line-height-tight: 1.1;  /* For headings */
+    --line-height-body: 1.5;   /* For body copy */
+    --line-height-loose: 1.7;  /* For longer paragraphs or lead text */
+
+    /* FONT SIZES (A modular scale is recommended) */
+    /* This scale uses 'rem' for accessibility and scalability. */
+    --font-size-100: 0.75rem;   /* 12px - Small print, captions */
+    --font-size-200: 0.875rem;  /* 14px - Secondary text */
+    --font-size-300: 1rem;      /* 16px - BASE/BODY SIZE */
+    --font-size-400: 1.125rem;  /* 18px - Large body, small headings */
+    --font-size-500: 1.25rem;   /* 20px - h4 */
+    --font-size-600: 1.5rem;    /* 24px - h3 */
+    --font-size-700: 2rem;      /* 32px - h2 */
+    --font-size-800: 2.5rem;    /* 40px - h1 */
+    --font-size-900: 3rem;      /* 48px - Display/Hero headings */
+
+    /* Body & Paragraphs */
+    --font-body-size: var(--font-size-300);
+    --font-body-weight: var(--font-weight-regular);
+    --font-body-line-height: var(--line-height-body);
+
+    /* Headings */
+    --font-heading-weight: var(--font-weight-bold);
+    --font-heading-line-height: var(--line-height-tight);
+
+    /* Specific Elements */
+    --font-link-weight: var(--font-weight-medium);
+    --font-button-weight: var(--font-weight-bold);
+    --font-caption-size: var(--font-size-100);
+}
+
+body {
+    padding:2rem;
+    font-family: Inter;
+    font-size: var(--font-body-size);
+    font-weight: var(--font-body-weight);
+    line-height: var(--font-body-line-height);
+    color: var(--text-primary);
+    background-color: var(--background-body);
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: var(--font-heading-family);
+  font-weight: var(--font-heading-weight);
+  line-height: var(--font-heading-line-height);
+}
+
+h1 { font-size: var(--font-size-800); }
+h2 { font-size: var(--font-size-700); }
+h3 { font-size: var(--font-size-600); }
+
+p {
+  /* No styles needed if they inherit correctly from body! */
+  /* This is a sign of a good system. */
+  max-width: 75ch; /* Best practice for readability */
+}
+
+.todo-div {
+    border: 1px solid var(--border-subtle);
+    width:25rem;
+    padding: 1rem;
+    background-color: var(--background-subtle);
+}
+
+.todo-item-name {
+    margin-bottom:1rem;
+}
+
+.todo-item-date {
+    font-weight:var(--font-weight-medium);
+}
+
+.todo-list-div {
+    
+}
