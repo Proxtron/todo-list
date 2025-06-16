@@ -6,7 +6,11 @@ export function createTodoItemDisplay(todoItem) {
 
     const template = `
         <h3 class="todo-item-name">${todoItem.title}</h3>
-        <p class="todo-item-date">${format(todoItem.dueDate, "M/d")}</p>
+        <p class="todo-item-date">${
+            todoItem.dueDate ?
+            format(todoItem.dueDate, "M/d") :
+            ""
+        }</p>
     `
 
     todoDiv.innerHTML = template;
