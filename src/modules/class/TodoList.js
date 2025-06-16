@@ -1,10 +1,16 @@
+import TodoItem from "./TodoItem";
+
 export default class TodoList {
     constructor() {
         this.todos = [];
     }
 
-    addTodo(todo) {
-        this.todos.push(todo);
+    addTodo(title, description, date) {
+        this.todos.push(new TodoItem(
+            title,
+            description,
+            date
+        ));
     }
 
     getTodo(index) {
