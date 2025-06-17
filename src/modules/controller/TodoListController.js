@@ -4,6 +4,7 @@ import { createTodoAddButton, createTodoAddForm } from "../components/TodoAddDis
 
 export default class TodoListController {
     todoList;
+
     todoListDisplay;
     todoAddBtn;
     todoAddForm;
@@ -55,24 +56,17 @@ export default class TodoListController {
 
     submitAddFormCallback(event) {
         event.preventDefault();
-
         const addFormData = new FormData(event.target);
 
         const dateStr = addFormData.get("task_date");
         const dateArr = dateStr.split("-").map((str) => parseInt(str));
 
-        if(dateStr) {
-            this.todoList.addTodo(
-                addFormData.get("task_title"),
-                addFormData.get("task_description"),
-                new Date(dateArr[0], dateArr[1] - 1, dateArr[2])
-            ); 
-        } else {
-            this.todoList.addTodo(
-                addFormData.get("task_title"),
-                addFormData.get("task_description")
-            )
-        }
+        this.todoList.addTodo(
+            addFormData.get("task_title"),
+            addFormData.get("task_description"),
+            dateStr ? new Date(dateArr[0], dateArr[1] - 1, dateArr[2]) : "",
+            addFormData.get("task_priority")
+        )
         
         this.renderTodoList();
     }

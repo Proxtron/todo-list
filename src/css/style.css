@@ -8,6 +8,14 @@
     --palette-neutral-light: #F7F7F7;
     --palette-neutral-base: #EFEFEF;
 
+    --palette-priority-red: #FF6361;
+    --palette-priority-yellow: #D2D462;
+    --palette-priority-green: #9DC183;
+
+    --priority-urgent: var(--palette-priority-red);
+    --priority-medium: var(--palette-priority-yellow);
+    --priority-low: var(--palette-priority-green);
+
     /* Backgrounds */
     --background-body: var(--palette-neutral-light);
     --background-subtle: var(--palette-neutral-base);
@@ -104,6 +112,18 @@ p {
     margin-bottom: .5rem;
 }
 
+.urgent-priority {
+    color:var(--priority-urgent);
+}
+
+.medium-priority {
+    color:var(--priority-medium);
+}
+
+.low-priority {
+    color:var(--priority-low);
+}
+
 .todo-item-date, .todo-item-add {
     font-weight:var(--font-weight-medium);
     font-size:var(--font-size-200);
@@ -192,10 +212,15 @@ p {
     opacity: .5;
 }
 
-.task-date-input {
+.task-date-input, .task-priority-input {
     width:auto;
     border: 1px solid var(--border-strong);
     padding:5px;
     border-radius: .5rem;
     margin-top: .5rem;
+}
+
+.other-task-inputs {
+    display:flex;
+    gap:1rem;
 }

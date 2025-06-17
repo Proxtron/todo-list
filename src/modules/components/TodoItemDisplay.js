@@ -12,8 +12,23 @@ export function createTodoItemDisplay(todoItem) {
             ""
         }</p>
     `
-
     todoDiv.innerHTML = template;
+
+    const todoItemNameHeading = todoDiv.querySelector(".todo-item-name");
+    switch(todoItem.priority) {
+        case "high":
+            todoItemNameHeading.classList.add("urgent-priority");
+            break;
+        case "medium":
+            todoItemNameHeading.classList.add("medium-priority"); 
+            break;
+        case "low":
+            todoItemNameHeading.classList.add("low-priority");
+            break;
+        default:
+            break;
+    }
+    
 
     return todoDiv;
 }

@@ -18,7 +18,15 @@ export function createTodoAddForm() {
         <div class="add-form-first-row">
             <input id="task-title-input" class="task-input" type="text" name="task_title" placeholder="Task title" required>
             <input class="task-description-input task-input" "type="text" name="task_description" placeholder="Description">
-            <input id="task-date-input" class="task-date-input task-input" type="date" name="task_date">
+            <div class="other-task-inputs">
+                <input id="task-date-input" class="task-date-input task-input" type="date" name="task_date">
+                <select class="task-priority-input" name="task_priority">
+                    <option value="">Priority</option>
+                    <option value="high">Urgent</option>
+                    <option value="medium">Medium</option>
+                    <option value="low">Low</option>
+                </select>
+            </div>
         </div>
         <div class="add-form-second-row">
             <button id="btn-cancel" class="btn-cancel" type="reset">Cancel</button>

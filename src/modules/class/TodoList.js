@@ -5,11 +5,12 @@ export default class TodoList {
         this.todos = [];
     }
 
-    addTodo(title, description, date) {
+    addTodo(title, description, date, priority) {
         this.todos.push(new TodoItem(
             title,
             description,
-            date
+            date,
+            priority
         ));
     }
 
