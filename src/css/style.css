@@ -146,6 +146,43 @@ p {
     padding:1rem;
 }
 
+.add-form-first-row {
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.add-form-second-row {
+    padding-top: 1rem;
+    display: flex;
+    justify-content: end;
+    gap:1rem;
+}
+
+.btn-cancel {
+    background: none;
+    appearance: none;
+    border:none;
+    color:var(--text-primary);
+    cursor:pointer;
+    font-weight: var(--font-button-weight);
+}
+
+.btn-add-task {
+    background-color: var(--background-inverse);
+    color:var(--text-on-inverse);
+    font-weight: var(--font-button-weight);
+    appearance: none;
+    border:none;
+    padding:.5rem .75rem;
+    cursor:pointer;
+    border-radius: .5rem;
+}
+
+.btn-add-task:disabled {
+    opacity: .8;
+    cursor:not-allowed
+}
+
 .task-input:focus {
     outline:none;
 }

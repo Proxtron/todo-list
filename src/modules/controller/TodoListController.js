@@ -3,6 +3,14 @@ import { createTodoListDisplay } from "../components/TodoListDisplay";
 import { createTodoAddButton, createTodoAddForm } from "../components/TodoAddDisplay";
 
 export default class TodoListController {
+    todoList;
+    todoListDisplay;
+    todoAddBtn;
+    todoAddForm;
+    todoFormCancelBtn;
+    todoFormAddTaskBtn;
+    todoTaskTitleInput;
+
     constructor() {
         this.todoList = new TodoList();
     }
@@ -21,14 +29,28 @@ export default class TodoListController {
     }
 
     replaceAddButton() {
-        this.todoAddForm = createTodoAddForm();
-        
-        this.todoAddForm.addEventListener("submit", (event) => {
-            this.submitAddFormCallback(event);
-        });
+        const todoAddFormElements = createTodoAddForm();
+        this.todoAddForm = todoAddFormElements.todoAddFormDiv;
+        this.todoFormCancelBtn = todoAddFormElements.formCancelBtn;
+        this.todoFormAddTaskBtn = todoAddFormElements.formAddTask;
+        this.todoTaskTitleInput = todoAddFormElements.todoTaskTitleInput;
+
+        this.attachFormEventListeners();
     
         this.todoAddBtn.remove();
         this.todoListDisplay.appendChild(this.todoAddForm);
+    }
+
+    attachFormEventListeners() {
+        this.todoAddForm.addEventListener("submit", (event) => this.submitAddFormCallback(event));
+        this.todoFormCancelBtn.addEventListener("click", () => this.renderTodoList());
+        this.todoTaskTitleInput.addEventListener("keyup", (event) => {
+            if(this.todoTaskTitleInput.validity.valid) {
+                this.todoFormAddTaskBtn.removeAttribute("disabled");
+            } else {
+                this.todoFormAddTaskBtn.setAttribute("disabled", "");     
+            }
+        });
     }
 
     submitAddFormCallback(event) {

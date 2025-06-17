@@ -15,12 +15,26 @@ export function createTodoAddForm() {
     todoAddFormDiv.classList.add("todo-add-form");
 
     const template = `
-        <input class="task-input" type="text" name="task_title" placeholder="Task title">
-        <input class="task-description-input task-input" "type="text" name="task_description" placeholder="Description">
-        <input id="task-date-input" class="task-date-input task-input" type="date" name="task_date">
-        <button style="display: none;" type="submit"></button>
+        <div class="add-form-first-row">
+            <input id="task-title-input" class="task-input" type="text" name="task_title" placeholder="Task title" required>
+            <input class="task-description-input task-input" "type="text" name="task_description" placeholder="Description">
+            <input id="task-date-input" class="task-date-input task-input" type="date" name="task_date">
+        </div>
+        <div class="add-form-second-row">
+            <button id="btn-cancel" class="btn-cancel" type="reset">Cancel</button>
+            <button id="btn-add-task" class="btn-add-task" type="submit" disabled>Add Task</button>
+        </div>
     `
 
     todoAddFormDiv.innerHTML = template;
-    return todoAddFormDiv;
+
+    const formCancelBtn = todoAddFormDiv.querySelector("#btn-cancel");
+    const formAddTask = todoAddFormDiv.querySelector("#btn-add-task");
+    const todoTaskTitleInput = todoAddFormDiv.querySelector("#task-title-input");
+    return {
+        todoAddFormDiv,
+        formCancelBtn,
+        formAddTask,
+        todoTaskTitleInput
+    };
 }
