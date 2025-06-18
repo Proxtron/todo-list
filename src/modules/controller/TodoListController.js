@@ -12,13 +12,24 @@ export default class TodoListController {
     todoFormAddTaskBtn;
     todoTaskTitleInput;
 
+    checkBoxes;
+
     constructor() {
         this.todoList = new TodoList();
+        this.todoList.addTodo("Urgent Task", "", new Date("2025", "7", "17"), "high");
     }
 
     renderTodoList() {
         document.body.innerHTML = "";
-        this.todoListDisplay = createTodoListDisplay(this.todoList);
+        const todoListElements = createTodoListDisplay(this.todoList);
+        this.todoListDisplay = todoListElements.todoListDiv;
+
+        this.checkBoxes = todoListElements.checkBoxes;
+        for(let i = 0; i < this.checkBoxes.length; i++) {
+            this.checkBoxes[i].addEventListener("click", (event) => {
+                this.removeTodoFromList(event.currentTarget.id);
+            });
+        }
 
         this.todoAddBtn = createTodoAddButton();
         this.todoAddBtn.addEventListener("click", () => {
@@ -27,6 +38,11 @@ export default class TodoListController {
         this.todoListDisplay.appendChild(this.todoAddBtn);
 
         document.body.appendChild(this.todoListDisplay);
+    }
+
+    removeTodoFromList(todoId) {
+        this.todoList.removeTodo(todoId);
+        this.renderTodoList();
     }
 
     replaceAddButton() {

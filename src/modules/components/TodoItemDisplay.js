@@ -1,16 +1,21 @@
 import { format } from "date-fns";
+import { createTodoCheckBox } from "./TodoCheckMark";
 
 export function createTodoItemDisplay(todoItem) {
     const todoDiv = document.createElement("div");
     todoDiv.classList.add("todo-div");
 
     const template = `
-        <h3 class="todo-item-name">${todoItem.title}</h3>
-        <p class="todo-item-date">${
-            todoItem.dueDate ?
-            format(todoItem.dueDate, "M/d") :
-            ""
-        }</p>
+        <div class="todo-check-mark-div">
+        </div>
+        <div>
+            <h3 class="todo-item-name">${todoItem.title}</h3>
+            <p class="todo-item-date">${
+                todoItem.dueDate ?
+                format(todoItem.dueDate, "M/d") :
+                ""
+            }</p>
+        </div>
     `
     todoDiv.innerHTML = template;
 
@@ -29,6 +34,10 @@ export function createTodoItemDisplay(todoItem) {
             break;
     }
     
-
-    return todoDiv;
+    const todoCheckBox = createTodoCheckBox(todoItem);
+    todoDiv.querySelector(".todo-check-mark-div").appendChild(todoCheckBox);
+    return {
+        todoDiv,
+        todoCheckBox
+    };
 }
