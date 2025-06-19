@@ -18,6 +18,16 @@ export default class TodoList {
         return this.todos[index];
     }
 
+    getTodoById(todoId) {
+        for(let i = 0; i < this.todos.length; i++) {
+            if(this.todos[i].id === todoId) {
+                return this.todos[i];
+            }
+        }
+        
+        return null;
+    }
+
     getLength() {
         return this.todos.length;
     }

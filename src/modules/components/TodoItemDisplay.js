@@ -4,7 +4,8 @@ import { createTodoCheckBox } from "./TodoCheckMark";
 export function createTodoItemDisplay(todoItem) {
     const todoDiv = document.createElement("div");
     todoDiv.classList.add("todo-div");
-
+    todoDiv.id = todoItem.id;
+    
     const template = `
         <div class="todo-check-mark-div">
         </div>

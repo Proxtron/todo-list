@@ -13,6 +13,7 @@ export default class TodoListController {
     todoTaskTitleInput;
 
     checkBoxes;
+    todoItemDivs;
 
     constructor() {
         this.todoList = new TodoList();
@@ -23,6 +24,13 @@ export default class TodoListController {
         document.body.innerHTML = "";
         const todoListElements = createTodoListDisplay(this.todoList);
         this.todoListDisplay = todoListElements.todoListDiv;
+
+        this.todoItemDivs = todoListElements.todoItemDivs;
+        for(let i = 0; i < this.todoItemDivs.length; i++) {
+            this.todoItemDivs[i].addEventListener("click", (event) => {
+                console.log(event.currentTarget);
+            });
+        }
 
         this.checkBoxes = todoListElements.checkBoxes;
         for(let i = 0; i < this.checkBoxes.length; i++) {

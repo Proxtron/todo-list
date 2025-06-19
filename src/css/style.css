@@ -105,12 +105,18 @@ p {
     display:grid;
     grid-template-columns: 1rem 1fr;
     column-gap: 1rem;
+    transition: background-color .3s linear;
+    cursor:pointer;
 }
 
 .todo-div:nth-last-child(1) {
     border:none;
 }
 
+.todo-div:nth-child(1) {
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+}
 .todo-item-name {
     margin-bottom: .5rem;
 }
@@ -254,4 +260,8 @@ p {
 
 .todo-check-mark:hover::before {
     background-color: var(--background-subtle);
+}
+
+.side-bar-div {
+    width:100px
 }
