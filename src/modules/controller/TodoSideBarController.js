@@ -1,12 +1,25 @@
-export default class TodoSideBarController {
-    todoItem;
+import { createTodoSideBar } from "../components/TodoSideBar";
 
-    constructor(todoItem) {
-        this.todoItem = todoItem;
+export default class TodoSideBarController {
+
+    sideBarDiv;
+    todoSideBar;
+    mainDiv;
+    
+
+    constructor() {
+        this.sideBarDiv = document.getElementById("side-bar-div");
+        this.mainDiv = document.getElementById("main");
+        this.todoSideBar = createTodoSideBar();
     }
 
-    renderModal() {
-
+    openSideBar(todoItem) {
+        this.sideBarDiv.appendChild(this.todoSideBar);
+        setTimeout(() => {
+            this.todoSideBar.classList.toggle("todo-side-bar-open");
+            this.mainDiv.classList.toggle("main-side-bar-open");
+        });
+        
     }
 
 }

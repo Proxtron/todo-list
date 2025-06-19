@@ -74,13 +74,13 @@
 }
 
 body {
-    padding:2rem;
     font-family: Inter;
     font-size: var(--font-body-size);
     font-weight: var(--font-body-weight);
     line-height: var(--font-body-line-height);
     color: var(--text-primary);
     background-color: var(--background-body);
+    min-height: 100vh;
 }
 
 h1, h2, h3, h4, h5 {
@@ -97,6 +97,10 @@ p {
   /* No styles needed if they inherit correctly from body! */
   /* This is a sign of a good system. */
   max-width: 75ch; /* Best practice for readability */
+}
+
+#todo-container {
+    padding:2rem 0;
 }
 
 .todo-div {
@@ -262,6 +266,27 @@ p {
     background-color: var(--background-subtle);
 }
 
-.side-bar-div {
-    width:100px
+.todo-side-bar {
+    width:0;
+    height:100vh;
+    position:fixed;
+    right:0;
+    top:0;
+    background-color: var(--background-accent);
+    box-shadow: -5px 0px 3px var(--background-accent);
+    transition: width .3s;
+}
+
+.todo-side-bar-open {
+    width:25vw;
+    transition: width .3s;
+}
+
+.main {
+    margin-right:0;
+    transition: margin-right .3s;
+}
+
+.main-side-bar-open {
+    margin-right: 25vw;
 }

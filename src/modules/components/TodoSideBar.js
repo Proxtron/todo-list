@@ -1,5 +1,7 @@
 
 export function createTodoSideBar() {
-    const sideBarDiv = document.createElement("div");
-    sideBarDiv.classList.add("side-bar-div");
+    const todoSideBar = document.createElement("div");
+    todoSideBar.classList.add("todo-side-bar");
+
+    return todoSideBar;
 }

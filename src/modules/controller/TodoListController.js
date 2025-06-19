@@ -1,10 +1,13 @@
 import TodoList from "../class/TodoList";
 import { createTodoListDisplay } from "../components/TodoListDisplay";
 import { createTodoAddButton, createTodoAddForm } from "../components/TodoAddDisplay";
+import TodoSideBarController from "./TodoSideBarController";
 
 export default class TodoListController {
     todoList;
+    todoSideBarController;
 
+    todoContainer;
     todoListDisplay;
     todoAddBtn;
     todoAddForm;
@@ -17,25 +20,33 @@ export default class TodoListController {
 
     constructor() {
         this.todoList = new TodoList();
+        this.todoContainer = document.getElementById("todo-container");
+        this.todoSideBarController = new TodoSideBarController();
         this.todoList.addTodo("Urgent Task", "", new Date("2025", "7", "17"), "high");
     }
 
     renderTodoList() {
-        document.body.innerHTML = "";
+        this.todoContainer.innerHTML = "";
         const todoListElements = createTodoListDisplay(this.todoList);
         this.todoListDisplay = todoListElements.todoListDiv;
 
         this.todoItemDivs = todoListElements.todoItemDivs;
         for(let i = 0; i < this.todoItemDivs.length; i++) {
             this.todoItemDivs[i].addEventListener("click", (event) => {
-                console.log(event.currentTarget);
+                if(event.currentTarget.classList.contains("todo-div")) {
+                    const clickedOnId = event.currentTarget.id;
+                    const clickedOnTodo = this.todoList.getTodo(clickedOnId);
+                    this.todoSideBarController.openSideBar(clickedOnTodo);
+                }
             });
         }
 
         this.checkBoxes = todoListElements.checkBoxes;
         for(let i = 0; i < this.checkBoxes.length; i++) {
             this.checkBoxes[i].addEventListener("click", (event) => {
-                this.removeTodoFromList(event.currentTarget.id);
+                if(event.currentTarget.classList.contains("todo-check-mark")) {
+                    this.removeTodoFromList(event.currentTarget.id);
+                }
             });
         }
 
@@ -45,7 +56,7 @@ export default class TodoListController {
         });
         this.todoListDisplay.appendChild(this.todoAddBtn);
 
-        document.body.appendChild(this.todoListDisplay);
+        this.todoContainer.appendChild(this.todoListDisplay);
     }
 
     removeTodoFromList(todoId) {
