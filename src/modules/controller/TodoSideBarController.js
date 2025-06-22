@@ -1,17 +1,18 @@
 import { createTodoSideBar } from "../components/TodoSideBar";
+import emitter from "./pubsub";
 
 export default class TodoSideBarController {
 
     sideBarDiv;
     todoSideBar;
     mainDiv;
+    sideBarForm;
     sideBarIsOpen;
 
     constructor() {
         this.sideBarDiv = document.getElementById("side-bar-div");
         this.mainDiv = document.getElementById("main");
         this.sideBarIsOpen = false;
-
     }
 
     handleSideBarState(todoItem) {
@@ -23,7 +24,10 @@ export default class TodoSideBarController {
     }
 
     openSideBar(todoItem) {
-        this.todoSideBar = createTodoSideBar(todoItem);
+        const sideBarElements = createTodoSideBar(todoItem);
+        this.todoSideBar = sideBarElements.todoSideBar;
+        this.sideBarForm = sideBarElements.sideBarForm;
+        this.todoItem = todoItem;
         this.sideBarDiv.appendChild(this.todoSideBar);
         this.addSideBarEventListeners();
 
@@ -38,10 +42,8 @@ export default class TodoSideBarController {
         this.sideBarDiv.classList.toggle("side-bar-div-open");
         this.mainDiv.classList.toggle("main-side-bar-open");  
         this.sideBarDiv.innerHTML = "";
-        // setTimeout(() => {
-        //     this.sideBarDiv.innerHTML = "";
-        // }, 300)
         this.sideBarIsOpen = false;
+        this.todoItem = null;
     }
 
     addSideBarEventListeners() {
@@ -49,11 +51,30 @@ export default class TodoSideBarController {
             this.closeSideBar();
         });
 
-        // document.addEventListener("click", (event) => {
-        //     if(event.target !== this.sideBarDiv) {
-        //         this.handleSideBarState();
-        //     }
-        // });
+        this.sideBarForm.addEventListener("submit", (event) => {
+            event.preventDefault();
+
+            const formData = new FormData(this.sideBarForm);
+            const dateStr = formData.get("date_edit");
+            const dateArr = dateStr.split("-").map((str) => parseInt(str));
+
+            this.todoItem.editData(
+                formData.get("title_edit"),
+                formData.get("description_edit"),
+                dateStr ? new Date(dateArr[0], dateArr[1] - 1, dateArr[2]) : "",
+                formData.get("priority_edit")
+            );
+
+            //Tell todoList to rerender
+            emitter.emit("sideBarFormChange");
+        });
+
+        const inputElements = this.sideBarDiv.querySelectorAll(".sidebar-input");
+        inputElements.forEach((element) => {
+            element.addEventListener("change", () => {
+                this.sideBarForm.dispatchEvent(new Event("submit"));
+            });
+        });
     }
 
 }

@@ -8,12 +8,12 @@ export function createTodoSideBar(todoItem) {
         <div class="sidebar-close-btn-container">
             <p id="sidebar-close-btn" class="sidebar-close-btn">&#10006;</p>
         </div>
-        <form>
-            <textarea class="title-edit" type="text" placeholder="Task title">${todoItem.title}</textarea>
-            <textarea placeholder="Description">${todoItem.description}</textarea>
+        <form id="sidebar-form">
+            <textarea class="title-edit sidebar-input" name="title_edit" placeholder="Task title">${todoItem.title}</textarea>
+            <textarea class="sidebar-input" name="description_edit" placeholder="Description">${todoItem.description}</textarea>
             <div class="sidebar-input-row">
-                <input type="date" value=${todoItem.dueDate ? format(todoItem.dueDate, "yyyy-MM-dd") : ""}>
-                <select>
+                <input class="date-edit sidebar-input" type="date" name="date_edit" value=${todoItem.dueDate ? format(todoItem.dueDate, "yyyy-MM-dd") : ""}>
+                <select class="priority-edit sidebar-input" name="priority_edit">
                     <option id="priority-select" value="">Priority</option>
                     <option id="urgent-select" value="high">Urgent</option>
                     <option id="medium-select" value="medium">Medium</option>
@@ -41,5 +41,10 @@ export function createTodoSideBar(todoItem) {
             break;
 
     }
-    return todoSideBar;
+
+    const sideBarForm = todoSideBar.querySelector("#sidebar-form");
+    return {
+        todoSideBar,
+        sideBarForm
+    };
 }

@@ -316,7 +316,6 @@ p {
     color:var(--text-on-inverse);
     padding:.25rem .5rem;
     border-radius: .5rem;
-    height:fit-content;
 
 }
 
@@ -326,6 +325,7 @@ p {
 
 .todo-side-bar textarea {
     resize:none;
+    height:10rem;
 }
 
 .title-edit {
@@ -337,6 +337,7 @@ p {
     display:grid;
     grid-template-columns: 1fr 1fr;
     column-gap: .5rem;
+    align-items: center;
 }
 
 .sidebar-close-btn {
@@ -349,4 +350,8 @@ p {
 
 .sidebar-close-btn-container {
     position:absolute;
+}
+
+.date-edit, .priority-edit {
+    height:100%;
 }

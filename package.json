@@ -30,6 +30,7 @@
   "description": "",
   "dependencies": {
     "date-fns": "^4.1.0",
+    "mitt": "^3.0.1",
     "uuid": "^11.1.0"
   }
 }
