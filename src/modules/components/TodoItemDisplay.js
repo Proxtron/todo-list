@@ -10,7 +10,7 @@ export function createTodoItemDisplay(todoItem) {
         <div class="todo-check-mark-div">
         </div>
         <div>
-            <h3 class="todo-item-name">${todoItem.title}</h3>
+            <p class="todo-item-name">${todoItem.title}</p>
             <p class="todo-item-date">${
                 todoItem.dueDate ?
                 format(todoItem.dueDate, "M/d") :

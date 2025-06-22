@@ -22,7 +22,13 @@ export default class TodoListController {
         this.todoList = new TodoList();
         this.todoContainer = document.getElementById("todo-container");
         this.todoSideBarController = new TodoSideBarController();
-        this.todoList.addTodo("Urgent Task", "", new Date("2025", "7", "17"), "high");
+        this.todoList.addTodo("Finalize Q3 performance report and send to management", "", new Date("2025", "7", "17"));
+        this.todoList.addTodo("Schedule a dentist appointment for a semi-annual check-up", "", new Date("2025", "7", "17"));
+        this.todoList.addTodo("Renew car registration before the end-of-month deadline", "", new Date("2025", "7", "17"));
+        this.todoList.addTodo("Research and book flights for the upcoming vacation to Denver", "", new Date("2025", "7", "17"));
+        this.todoList.addTodo("Complete Module 4 of the online project management course", "", new Date("2025", "7", "17"));
+        this.todoList.addTodo("Pick up groceries: milk, eggs, bread, and chicken breast", "", new Date("2025", "7", "17"));
+        this.todoList.addTodo("Draft the initial outline for the new website's \"About Us\" page", "", new Date("2025", "7", "17"));
     }
 
     renderTodoList() {
@@ -33,20 +39,17 @@ export default class TodoListController {
         this.todoItemDivs = todoListElements.todoItemDivs;
         for(let i = 0; i < this.todoItemDivs.length; i++) {
             this.todoItemDivs[i].addEventListener("click", (event) => {
-                if(event.currentTarget.classList.contains("todo-div")) {
-                    const clickedOnId = event.currentTarget.id;
-                    const clickedOnTodo = this.todoList.getTodo(clickedOnId);
-                    this.todoSideBarController.openSideBar(clickedOnTodo);
-                }
+                const clickedOnId = event.currentTarget.id;
+                const clickedOnTodo = this.todoList.getTodoById(clickedOnId);
+                this.todoSideBarController.handleSideBarState(clickedOnTodo);
             });
         }
 
         this.checkBoxes = todoListElements.checkBoxes;
         for(let i = 0; i < this.checkBoxes.length; i++) {
             this.checkBoxes[i].addEventListener("click", (event) => {
-                if(event.currentTarget.classList.contains("todo-check-mark")) {
-                    this.removeTodoFromList(event.currentTarget.id);
-                }
+                event.stopPropagation();
+                this.removeTodoFromList(event.currentTarget.id);
             });
         }
 
