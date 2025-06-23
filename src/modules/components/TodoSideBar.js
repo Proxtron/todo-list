@@ -20,6 +20,10 @@ export function createTodoSideBar(todoItem) {
                     <option id="low-select" value="low">Low</option>
                 </select>
             </div>
+            <div class="btns-row">
+                <button id="delete-task-btn" class="sidebar-action-btn delete-task-btn">Delete</button>
+                <button id="save-task-btn" type="submit" class="sidebar-action-btn save-task-btn">Save</button>
+            </div>
         </form>
     `;
     todoSideBar.innerHTML = template;
@@ -43,8 +47,12 @@ export function createTodoSideBar(todoItem) {
     }
 
     const sideBarForm = todoSideBar.querySelector("#sidebar-form");
+    const deleteTaskBtn = todoSideBar.querySelector("#delete-task-btn");
+    const saveTaskBtn = todoSideBar.querySelector("#save-task-btn");
     return {
         todoSideBar,
-        sideBarForm
+        sideBarForm,
+        deleteTaskBtn,
+        saveTaskBtn
     };
 }

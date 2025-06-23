@@ -28,6 +28,10 @@ export default class TodoListController {
             this.renderTodoList();
         });
 
+        emitter.on("sideBarTaskDelete", (todoId) => {
+            this.todoList.removeTodo(todoId);
+        });
+
         this.todoList.addTodo("Finalize Q3 performance report and send to management", "", new Date("2025", "5", "17"));
         this.todoList.addTodo("Schedule a dentist appointment for a semi-annual check-up", "", new Date("2025", "5", "17"));
         this.todoList.addTodo("Renew car registration before the end-of-month deadline", "", new Date("2025", "5", "17"));

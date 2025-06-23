@@ -28,6 +28,9 @@ export default class TodoSideBarController {
         this.todoSideBar = sideBarElements.todoSideBar;
         this.sideBarForm = sideBarElements.sideBarForm;
         this.todoItem = todoItem;
+        this.deleteTaskBtn = sideBarElements.deleteTaskBtn;
+        this.saveTaskBtn = sideBarElements.saveTaskBtn;
+
         this.sideBarDiv.appendChild(this.todoSideBar);
         this.addSideBarEventListeners();
 
@@ -74,6 +77,16 @@ export default class TodoSideBarController {
             element.addEventListener("change", () => {
                 this.sideBarForm.dispatchEvent(new Event("submit"));
             });
+        });
+
+        this.saveTaskBtn.addEventListener("click", (event) => {
+            this.closeSideBar();
+        });
+
+        this.deleteTaskBtn.addEventListener("click", () => {
+            emitter.emit("sideBarTaskDelete", this.todoItem.id)
+            emitter.emit("sideBarFormChange");
+            this.closeSideBar();
         });
     }
 

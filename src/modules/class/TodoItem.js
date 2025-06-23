@@ -1,23 +1,19 @@
 import {v4 as uuid} from 'uuid';
 
 export default class TodoItem {
-    constructor(title, description="", dueDate="", priority="", notes="", checkList="") {
+    constructor(title, description="", dueDate="", priority="") {
         this.id = uuid();
         this.title = title,
         this.description = description,
         this.dueDate = dueDate;
         this.priority = priority;
-        this.notes = notes;
-        this.checkList = checkList;
     }
 
-    editData(title="", description="", dueDate="", priority="", notes="", checkList="") {
+    editData(title="", description="", dueDate="", priority="") {
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
         this.priority = priority;
-        this.notes = notes;
-        this.checkList = checkList;
     }
 }
     
