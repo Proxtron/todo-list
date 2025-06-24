@@ -22,9 +22,9 @@ export default class ProjectCollection {
         for(let i = 0; i < this.projects.length; i++) {
             if(this.projects[i].name === name) {
                 return true;
-            }
-            return false;
+            }    
         }
+        return false;
     }
 
     getProject(name) {
