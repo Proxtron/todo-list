@@ -388,7 +388,35 @@ p {
     margin:2rem auto 0 auto;
 }
 
-.project-title {
-    margin-bottom: 2rem;
-    margin-left: 1.5rem;
+.project-name-menu {
+    width:90%;
+    margin:0 auto 1.5rem auto;
+}
+
+.project-title-input {
+    flex:1;
+    color:var(--text-primary);
+    font-size: 2rem;
+    font-weight: 600;
+    appearance: none;
+    border: 1px solid rgb(44 62 80 / .25);
+    background-color: var(--background-body);
+    border-radius: .75rem;
+    padding:.5rem 1rem;
+}
+
+.project-title-btn {
+    width:100%;
+    display: flex;
+    padding:1rem 1.5rem;
+    background: none;
+    border:1px solid var(--palette-desaturated-bluegray);
+    border-radius: .75rem;
+    gap:1rem;
+    background-color: var(--palette-minty-gray);
+    cursor:pointer;
+}
+
+.arrow-icon {
+    width:48px;
 }
