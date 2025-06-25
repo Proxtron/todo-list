@@ -5,9 +5,7 @@ import ProjectNameMenuController from "./modules/controller/ProjectNameMenuContr
 import TodoListController from "./modules/controller/TodoListController.js";
 
 const todoListController = new TodoListController();
-const projectCollection = new ProjectCollection();
-projectCollection.addProject("My Project");
-const projectNameMenuController = new ProjectNameMenuController(projectCollection);
+const projectNameMenuController = new ProjectNameMenuController();
 
 
 
