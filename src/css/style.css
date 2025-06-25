@@ -391,6 +391,9 @@ p {
 .project-name-menu {
     width:90%;
     margin:0 auto 1.5rem auto;
+    border:1px solid var(--palette-desaturated-bluegray);
+    border-radius: .75rem;
+    background-color: var(--palette-minty-gray);
 }
 
 .project-title-input {
@@ -410,13 +413,52 @@ p {
     display: flex;
     padding:1rem 1.5rem;
     background: none;
-    border:1px solid var(--palette-desaturated-bluegray);
-    border-radius: .75rem;
+    border:none;
     gap:1rem;
-    background-color: var(--palette-minty-gray);
     cursor:pointer;
 }
 
+.btn-menu-open {
+    border-bottom: 1px solid rgb(44 62 80 / .25);
+}
 .arrow-icon {
     width:48px;
+    transition: transform .5s;
+}
+
+.arrow-icon-rotate {
+    transform: rotate(180deg);
+}
+
+.project-list-menu{ 
+    background-color: var(--palette-minty-gray);
+    border-radius: .75rem;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .5s;
+}
+
+.project-list-row {
+    border-bottom: 1px solid rgb(44 62 80 / .25);
+    padding:1rem 2rem;
+    cursor:pointer;
+    transition: background-color .3s;
+}
+
+.project-list-row:hover {
+    background-color: var(--background-body);
+}
+
+.project-list-row:nth-last-child(1) {
+    border-bottom: none;
+}
+
+.project-list-open {
+    max-height: fit-content;
+}
+
+.project-row-name {
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    font-weight: 600;
 }

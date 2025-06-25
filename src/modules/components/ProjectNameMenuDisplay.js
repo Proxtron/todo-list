@@ -4,31 +4,37 @@ export function createProjectNameMenu(selectedProject, unselectedProjects) {
     const projectNameMenu = document.createElement("div");
     projectNameMenu.classList.add("project-name-menu");
     const template = `
-        <button class="project-title-btn" type="button">
+        <button id="project-title-btn" class="project-title-btn" type="button">
             <input id="project-title-input" class="project-title-input" type="text" value="${selectedProject.name}" placeholder="Enter a Project Title...">
             <img id="arrow-icon" class="arrow-icon" alt="Arrow">
         </button>
         <div id="project-list-menu" class="project-list-menu">
-            
         </div>
     `
 
     projectNameMenu.innerHTML = template;
-    projectNameMenu.querySelector("#arrow-icon").src = arrowIcon;
+    const arrowIconElement = projectNameMenu.querySelector("#arrow-icon");
+    arrowIconElement.src = arrowIcon;
 
     const projectListMenu = projectNameMenu.querySelector("#project-list-menu");
-    let projectListMenuTemplate = ``;
+    const projectListMenuRows = [];
     for(let i = 0; i < unselectedProjects.length; i++) {
-        projectListMenuTemplate += `
-            ${unselectedProjects[i].name}
-        `;
+        const projectListRow = document.createElement("div");
+        projectListRow.classList.add("project-list-row");
+        projectListRow.innerHTML = `<h2 class="project-row-name">${unselectedProjects[i].name}</h2>`;
+        projectListMenu.appendChild(projectListRow);
+        projectListMenuRows.push(projectListRow);
     }
 
-    projectListMenu.innerHTML = projectListMenuTemplate;
 
     const projectTitleInput = projectNameMenu.querySelector("#project-title-input");
+    const projectTitleButton = projectNameMenu.querySelector("#project-title-btn");
     return {
         projectNameMenu,
-        projectTitleInput
+        projectTitleInput,
+        arrowIconElement,
+        projectListMenu,
+        projectTitleButton,
+        projectListMenuRows
     }
 }

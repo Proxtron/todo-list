@@ -48,11 +48,11 @@ export default class ProjectCollection {
         }
         return unselectedProjects;
     }
-    setSelectedProject(project) {
-        if(this.contains(project.name)) {
-            this.selectedProject = project;
+    setSelectedProject(name) {
+        if(this.contains(name)) {
+            this.selectedProject = this.getProject(name);
         } else {
-            throw new Error(`Project with name: ${project.name} does not exist.`)
+            throw new Error(`Project with name: ${name} does not exist.`)
         }
     }
 }

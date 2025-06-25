@@ -6,17 +6,26 @@ export default class ProjectNameMenuController {
     
     constructor() {
         this.projectCollection = new ProjectCollection();
+        this.projectCollection.addProject("My Other Project");
+        this.projectCollection.addProject("My Third Project");
+        this.projectCollection.addProject("My Fourth Project");
         this.projectTitleContainer = document.getElementById("project-title-container");
         this.updateDisplayedTodoList();
         this.render();
     }
 
     render() {
+        this.projectTitleContainer.innerHTML = "";
         const projectMenuElements = createProjectNameMenu(this.projectCollection.selectedProject, 
             this.projectCollection.getUnselectedProjects());
 
         this.projectTitleInput = projectMenuElements.projectTitleInput;
         this.projectNameMenu = projectMenuElements.projectNameMenu;
+        this.arrowIconElement = projectMenuElements.arrowIconElement;
+        this.projectListMenu = projectMenuElements.projectListMenu;
+        this.projectTitleBtn = projectMenuElements.projectTitleButton;
+        this.projectListMenuRows = projectMenuElements.projectListMenuRows;
+
         this.projectTitleContainer.appendChild(projectMenuElements.projectNameMenu);
         
         this.addEventListeners();
@@ -28,10 +37,22 @@ export default class ProjectNameMenuController {
 
     addEventListeners() {
         this.projectNameMenu.addEventListener("click", (event) => {
-            console.log("click");
+            this.arrowIconElement.classList.toggle("arrow-icon-rotate");
+            this.projectListMenu.classList.toggle("project-list-open");
+            this.projectTitleBtn.classList.toggle("btn-menu-open");
         });
         
         this.projectTitleInput.addEventListener("click", event => event.stopPropagation());
+
+        this.projectListMenuRows.forEach((rowElement) => {
+            rowElement.addEventListener("click", (event) => {
+                event.stopPropagation();
+                this.projectCollection.setSelectedProject(rowElement.innerText);
+                this.render();
+                this.updateDisplayedTodoList();
+            })
+        });
+        
     }
 
 }
