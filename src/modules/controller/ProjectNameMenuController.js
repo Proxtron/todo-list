@@ -25,6 +25,7 @@ export default class ProjectNameMenuController {
         this.projectListMenu = projectMenuElements.projectListMenu;
         this.projectTitleBtn = projectMenuElements.projectTitleButton;
         this.projectListMenuRows = projectMenuElements.projectListMenuRows;
+        this.titleDisplay = projectMenuElements.titleDisplay;
 
         this.projectTitleContainer.appendChild(projectMenuElements.projectNameMenu);
         
@@ -42,7 +43,15 @@ export default class ProjectNameMenuController {
             this.projectTitleBtn.classList.toggle("btn-menu-open");
         });
         
-        this.projectTitleInput.addEventListener("click", event => event.stopPropagation());
+        this.titleDisplay.addEventListener("click", (event) => {
+            event.stopPropagation();
+        });
+
+        this.projectTitleInput.addEventListener("change", (event) => {
+            const selectedProject = this.projectCollection.selectedProject;
+            this.projectCollection.editProjectName(selectedProject.name, this.projectTitleInput.value);
+            console.log(this.projectCollection)
+        });
 
         this.projectListMenuRows.forEach((rowElement) => {
             rowElement.addEventListener("click", (event) => {
@@ -52,6 +61,7 @@ export default class ProjectNameMenuController {
                 this.updateDisplayedTodoList();
             })
         });
+
         
     }
 

@@ -48,11 +48,21 @@ export default class ProjectCollection {
         }
         return unselectedProjects;
     }
+
     setSelectedProject(name) {
         if(this.contains(name)) {
             this.selectedProject = this.getProject(name);
         } else {
             throw new Error(`Project with name: ${name} does not exist.`)
         }
+    }
+
+    editProjectName(oldName, newName) {
+        if(this.contains(newName)) {
+            throw new Error("Project Name already exists. Please choose a unique project name!");
+        }
+
+        const projectToEdit = this.getProject(oldName);
+        projectToEdit.name = newName;
     }
 }

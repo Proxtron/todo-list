@@ -394,6 +394,7 @@ p {
     border:1px solid var(--palette-desaturated-bluegray);
     border-radius: .75rem;
     background-color: var(--palette-minty-gray);
+    
 }
 
 .project-title-input {
@@ -405,8 +406,16 @@ p {
     border: 1px solid rgb(44 62 80 / .25);
     background-color: var(--background-body);
     border-radius: .75rem;
-    padding:.5rem 1rem;
+    padding:.5rem 4rem .5rem 1rem;
 }
+
+.project-title-input:disabled {
+    background-color: var(--background-subtle);
+    color:rgb(44 62 80 / .75);
+    cursor: not-allowed;
+}
+
+
 
 .project-title-btn {
     width:100%;
@@ -422,7 +431,7 @@ p {
     border-bottom: 1px solid rgb(44 62 80 / .25);
 }
 .arrow-icon {
-    width:48px;
+    width:36px;
     transition: transform .5s;
 }
 
@@ -461,4 +470,27 @@ p {
     color: var(--text-primary);
     font-size: 1.5rem;
     font-weight: 600;
+}
+
+.edit-icon {
+    width:36px;
+}
+
+.title-display {
+    display:flex;
+    align-items: center;
+    position: relative;
+
+}
+
+.title-display::after {
+    content: url("../assets/edit.svg");
+    position: absolute;
+    right:2rem;
+    opacity: .6;
+    transition: opacity .3s;
+}
+
+.title-display:hover::after {
+    opacity: 1;
 }
