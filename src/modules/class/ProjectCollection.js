@@ -58,7 +58,7 @@ export default class ProjectCollection {
     }
 
     editProjectName(oldName, newName) {
-        if(this.contains(newName)) {
+        if(oldName !== newName && this.contains(newName)) {
             throw new Error("Project Name already exists. Please choose a unique project name!");
         }
 

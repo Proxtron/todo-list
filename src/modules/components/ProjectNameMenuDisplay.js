@@ -5,6 +5,7 @@ export function createProjectNameMenu(selectedProject, unselectedProjects) {
     const projectNameMenu = document.createElement("div");
     projectNameMenu.classList.add("project-name-menu");
     const template = `
+        <p id="error-msg" class="error-msg"></p>
         <button id="project-title-btn" class="project-title-btn" type="button">
             <input id="project-title-input" class="project-title-input" type="text" value="${selectedProject.name}" disabled placeholder="Enter a Project Title...">
             <div id="title-display" class="title-display"></div>
@@ -33,6 +34,7 @@ export function createProjectNameMenu(selectedProject, unselectedProjects) {
     const projectTitleInput = projectNameMenu.querySelector("#project-title-input");
     const projectTitleButton = projectNameMenu.querySelector("#project-title-btn");
     const titleDisplay = projectNameMenu.querySelector("#title-display");
+    const errorMsg = projectNameMenu.querySelector("#error-msg");
     return {
         projectNameMenu,
         projectTitleInput,
@@ -40,6 +42,7 @@ export function createProjectNameMenu(selectedProject, unselectedProjects) {
         projectListMenu,
         projectTitleButton,
         projectListMenuRows,
-        titleDisplay
+        titleDisplay,
+        errorMsg
     }
 }

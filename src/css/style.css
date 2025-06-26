@@ -81,7 +81,11 @@
     --font-button-weight: var(--font-weight-bold);
     --font-caption-size: var(--font-size-100);
 
-    --side-bar-width: 600px
+    --side-bar-width: 600px;
+
+    --edit-url: url("../assets/edit.svg");
+    --check-url: url("../assets/check.svg");
+    --title-display-icon: var(--edit-url);
 }
 
 body {
@@ -484,7 +488,7 @@ p {
 }
 
 .title-display::after {
-    content: url("../assets/edit.svg");
+    content: var(--title-display-icon);
     position: absolute;
     right:2rem;
     opacity: .6;
