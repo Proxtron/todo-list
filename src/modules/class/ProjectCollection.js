@@ -65,4 +65,16 @@ export default class ProjectCollection {
         const projectToEdit = this.getProject(oldName);
         projectToEdit.name = newName;
     }
+
+    getSize() {
+        return this.projects.length;
+    }
+
+    removeProject(name) {
+        for(let i = 0; i < this.projects.length; i++) {
+            if(name === this.projects[i].name) {
+                this.projects.splice(i, 1);
+            }
+        }
+    }
 }
