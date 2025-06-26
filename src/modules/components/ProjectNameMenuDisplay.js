@@ -1,6 +1,7 @@
 import arrowIcon from "../../assets/arrow.svg";
 import deleteIcon from "../../assets/delete-svgrepo-com.svg";
 import addIcon from "../../assets/add.svg";
+import cancelIcon from "../../assets/cancel.svg"
 
 export function createProjectNameMenu(selectedProject, unselectedProjects) {
     const projectNameMenu = document.createElement("div");
@@ -9,8 +10,9 @@ export function createProjectNameMenu(selectedProject, unselectedProjects) {
         <p id="error-msg" class="error-msg"></p>
         <div id="project-title-btn" class="project-title-btn">
             <input id="project-title-input" class="project-title-input" type="text" value="${selectedProject.name}" disabled placeholder="Enter a Project Title...">
-            <div id="title-display" class="title-display"></div>
-            <img id="add-icon" class="add-icon" alt="Add Project">
+            <div id="title-display" title="Edit project name" class="title-display"></div>
+            <img id="cancel-icon" title="Cancel edit" class="cancel-icon" alt="Cancel">
+            <img id="add-icon" title="Add a project" class="add-icon" alt="Add Project">
             <img id="arrow-icon" class="arrow-icon" alt="Arrow">
         </div>
         <div id="project-list-menu" class="project-list-menu">
@@ -24,6 +26,9 @@ export function createProjectNameMenu(selectedProject, unselectedProjects) {
 
     const addIconElement = projectNameMenu.querySelector("#add-icon");
     addIconElement.src = addIcon;
+
+    const cancelIconElement = projectNameMenu.querySelector("#cancel-icon");
+    cancelIconElement.src = cancelIcon;
 
     const projectListMenu = projectNameMenu.querySelector("#project-list-menu");
     for(let i = 0; i < unselectedProjects.length; i++) {

@@ -17,6 +17,11 @@ export default class ProjectNameMenuController {
 
     render() {
         this.projectTitleContainer.innerHTML = "";
+        this.inputEnabled = false;
+        this.editNameMode = false;
+        this.addNameMode = false;
+        document.documentElement.style.setProperty("--title-display-icon", "var(--edit-url)");
+
         const unselectedProjects = this.projectCollection.getUnselectedProjects();
         const projectNameMenu = createProjectNameMenu(this.projectCollection.selectedProject, unselectedProjects);
 
@@ -41,6 +46,7 @@ export default class ProjectNameMenuController {
         this.titleDisplay = projectNameMenu.querySelector("#title-display");
         this.errorMsg = projectNameMenu.querySelector("#error-msg");
         this.deleteIcons = projectNameMenu.querySelectorAll(".delete-project-icon");
+        this.cancelIcon = projectNameMenu.querySelector("#cancel-icon");
 
         this.projectTitleContainer.appendChild(projectNameMenu);
         
@@ -52,6 +58,12 @@ export default class ProjectNameMenuController {
     }
 
     addEventListeners() {
+        this.cancelIcon.addEventListener("click", (event) =>{
+            event.stopPropagation();
+            this.render();
+        });
+
+
         this.deleteIcons.forEach((deleteIcon) => {
             deleteIcon.addEventListener("click", (event) => {
                 event.stopPropagation();
@@ -66,6 +78,7 @@ export default class ProjectNameMenuController {
             this.projectListMenu.classList.toggle("project-list-open");
             this.projectTitleBtn.classList.toggle("btn-menu-open");
         });
+
         //Input field icons
         this.titleDisplay.addEventListener("click", (event) => {
             event.stopPropagation();
@@ -137,6 +150,8 @@ export default class ProjectNameMenuController {
             document.documentElement.style.setProperty("--title-display-icon", "var(--check-url)");
             this.inputEnabled = !this.inputEnabled;
             this.projectTitleInput.toggleAttribute("disabled");
+            this.cancelIcon.style.display = "block";
+            this.titleDisplay.title = "Confirm edit";
 
             this.editNameMode = true;
             this.addNameMode = false;
@@ -155,6 +170,7 @@ export default class ProjectNameMenuController {
             this.projectTitleInput.toggleAttribute("disabled");
             this.projectTitleInput.placeholder = "New Project Title...";
             this.projectTitleInput.value = "";
+            this.cancelIcon.style.display = "block";
         }
     }
 
