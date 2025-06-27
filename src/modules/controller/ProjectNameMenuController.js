@@ -10,6 +10,7 @@ export default class ProjectNameMenuController {
         this.inputEnabled = false;
         this.editNameMode = false;
         this.addNameMode = false;
+        this.dropdownOpen = false;
 
         this.updateDisplayedTodoList();
         this.render();
@@ -29,7 +30,8 @@ export default class ProjectNameMenuController {
         this.projectTitleInput = projectNameMenu.querySelector("#project-title-input");
 
         this.arrowIconElement = projectNameMenu.querySelector("#arrow-icon");
-        if(this.projectCollection.getSize() <= 1) {
+
+        if(this.projectCollection.getSize() == 1) {
             this.arrowIconElement.style.display = "none";
         }
 
@@ -47,6 +49,12 @@ export default class ProjectNameMenuController {
         this.errorMsg = projectNameMenu.querySelector("#error-msg");
         this.deleteIcons = projectNameMenu.querySelectorAll(".delete-project-icon");
         this.cancelIcon = projectNameMenu.querySelector("#cancel-icon");
+
+        if(this.dropdownOpen) {
+            this.arrowIconElement.classList.toggle("arrow-icon-rotate");
+            this.projectListMenu.classList.toggle("project-list-open");
+            this.projectTitleBtn.classList.toggle("btn-menu-open");
+        }
 
         this.projectTitleContainer.appendChild(projectNameMenu);
         
@@ -74,6 +82,7 @@ export default class ProjectNameMenuController {
         });
 
         this.arrowIconElement.addEventListener("click", (event) => {
+            this.dropdownOpen = !this.dropdownOpen;
             this.arrowIconElement.classList.toggle("arrow-icon-rotate");
             this.projectListMenu.classList.toggle("project-list-open");
             this.projectTitleBtn.classList.toggle("btn-menu-open");
