@@ -35,14 +35,6 @@ export default class TodoListController {
             this.setSelectedTodoList(todoList);
             this.renderTodoList();
         });
-
-        // this.todoList.addTodo("Finalize Q3 performance report and send to management", "", new Date("2025", "5", "17"));
-        // this.todoList.addTodo("Schedule a dentist appointment for a semi-annual check-up", "", new Date("2025", "5", "17"));
-        // this.todoList.addTodo("Renew car registration before the end-of-month deadline", "", new Date("2025", "5", "17"));
-        // this.todoList.addTodo("Research and book flights for the upcoming vacation to Denver", "", new Date("2025", "5", "17"));
-        // this.todoList.addTodo("Complete Module 4 of the online project management course", "", new Date("2025", "5", "17"));
-        // this.todoList.addTodo("Pick up groceries: milk, eggs, bread, and chicken breast", "", new Date("2025", "5", "17"));
-        // this.todoList.addTodo("Draft the initial outline for the new website's \"About Us\" page", "", new Date("2025", "5", "17"));
     }
 
     renderTodoList() {
@@ -111,7 +103,14 @@ export default class TodoListController {
         const addFormData = new FormData(event.target);
 
         const dateStr = addFormData.get("task_date");
-        const dateArr = dateStr.split("-").map((str) => parseInt(str));
+        let dateArr;
+        if(dateStr) {
+            dateArr = dateStr.split("-").map((str) => parseInt(str));
+        } else {
+            dateArr = ["", "", ""];
+        }
+
+        console.log(dateArr);
 
         this.todoList.addTodo(
             addFormData.get("task_title"),

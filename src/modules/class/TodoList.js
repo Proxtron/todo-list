@@ -1,4 +1,5 @@
 import TodoItem from "./TodoItem";
+import emitter from "../controller/pubsub";
 
 export default class TodoList {
     constructor() {
@@ -12,6 +13,7 @@ export default class TodoList {
             date,
             priority
         ));
+        emitter.emit("stateChange");
     }
 
     getTodo(index) {

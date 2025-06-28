@@ -1,11 +1,15 @@
 import Project from "./Project";
 import TodoList from "./TodoList";
+import emitter from "../controller/pubsub";
 
 export default class ProjectCollection {
     constructor() {
         this.projects = [];
         const firstProject = this.addProject("My First Project");
         this.selectedProject = firstProject;
+        emitter.on("stateChange", () => {
+            this.#populateStorage();
+        })
     }
 
     addProject(name) {
@@ -15,11 +19,11 @@ export default class ProjectCollection {
                 new TodoList()
             );
             this.projects.push(newProject);
+            emitter.emit("stateChange");
             return newProject;
         } else {
             throw new Error("Project Name already exists. Please choose a unique project name!");
         }
-        
     }
 
     contains(name) {
@@ -64,6 +68,7 @@ export default class ProjectCollection {
 
         const projectToEdit = this.getProject(oldName);
         projectToEdit.name = newName;
+        emitter.emit("stateChange");
     }
 
     getSize() {
@@ -74,7 +79,12 @@ export default class ProjectCollection {
         for(let i = 0; i < this.projects.length; i++) {
             if(name === this.projects[i].name) {
                 this.projects.splice(i, 1);
+                emitter.emit("stateChange");
             }
         }
+    }
+
+    #populateStorage() {
+        localStorage.setItem("projectCollection", JSON.stringify(this.projects));
     }
 }
