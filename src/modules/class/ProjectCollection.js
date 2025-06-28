@@ -1,15 +1,21 @@
 import Project from "./Project";
 import TodoList from "./TodoList";
 import emitter from "../controller/pubsub";
+import { format } from "date-fns";
 
 export default class ProjectCollection {
     constructor() {
         this.projects = [];
-        const firstProject = this.addProject("My First Project");
-        this.selectedProject = firstProject;
+
+        //Storage logic
         emitter.on("stateChange", () => {
             this.#populateStorage();
-        })
+        });
+
+        if(this.#retrieveData() === false) {
+            const firstProject = this.addProject("My First Project");
+            this.selectedProject = firstProject;
+        }
     }
 
     addProject(name) {
@@ -86,5 +92,30 @@ export default class ProjectCollection {
 
     #populateStorage() {
         localStorage.setItem("projectCollection", JSON.stringify(this.projects));
+    }
+
+    #retrieveData() {
+        if(!localStorage.getItem("projectCollection")) {
+            return false;
+        }
+
+        const retrievedData = JSON.parse(localStorage.getItem("projectCollection"));
+        for(let i = 0; i < retrievedData.length; i++) {
+            const projectJSON = retrievedData[i];
+            const project = this.addProject(projectJSON.name);
+
+            this.selectedProject = project;
+            for(let j = 0; j < projectJSON.todoList.todos.length; j++) {
+                const todo = projectJSON.todoList.todos[j];
+                const todoDate = format(todo.dueDate, "y/M/d");
+                
+                project.todoList.addTodo(
+                    todo.title,
+                    todo.description,
+                    todoDate,
+                    todo.priority
+                );
+            }
+        }
     }
 }

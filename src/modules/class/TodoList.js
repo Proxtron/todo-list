@@ -38,6 +38,7 @@ export default class TodoList {
         for(let i = 0; i < this.todos.length; i++) {
             if(this.todos[i].id === todoId) {
                 this.todos.splice(i, 1);
+                emitter.emit("stateChange");
             }
         }
     }
