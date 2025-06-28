@@ -15,6 +15,7 @@ export default class ProjectCollection {
         if(this.#retrieveData() === false) {
             const firstProject = this.addProject("My First Project");
             this.selectedProject = firstProject;
+            emitter.emit("stateChange");
         }
     }
 
@@ -62,6 +63,7 @@ export default class ProjectCollection {
     setSelectedProject(name) {
         if(this.contains(name)) {
             this.selectedProject = this.getProject(name);
+            emitter.emit("stateChange");
         } else {
             throw new Error(`Project with name: ${name} does not exist.`)
         }
@@ -92,6 +94,10 @@ export default class ProjectCollection {
 
     #populateStorage() {
         localStorage.setItem("projectCollection", JSON.stringify(this.projects));
+        if(this.selectedProject) {
+            localStorage.setItem("selectedProjectName", this.selectedProject.name);
+        }
+        
     }
 
     #retrieveData() {
@@ -104,10 +110,12 @@ export default class ProjectCollection {
             const projectJSON = retrievedData[i];
             const project = this.addProject(projectJSON.name);
 
-            this.selectedProject = project;
             for(let j = 0; j < projectJSON.todoList.todos.length; j++) {
                 const todo = projectJSON.todoList.todos[j];
-                const todoDate = format(todo.dueDate, "y/M/d");
+                let todoDate = "";
+                if(todo.dueDate) {
+                    todoDate = format(todo.dueDate, "y/M/d");
+                }
                 
                 project.todoList.addTodo(
                     todo.title,
@@ -116,6 +124,12 @@ export default class ProjectCollection {
                     todo.priority
                 );
             }
+        }
+
+        if(localStorage.getItem("selectedProjectName")) {
+            this.setSelectedProject(localStorage.getItem("selectedProjectName"));
+        } else {
+
         }
     }
 }

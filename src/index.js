@@ -6,6 +6,3 @@ import TodoListController from "./modules/controller/TodoListController.js";
 
 const todoListController = new TodoListController();
 const projectNameMenuController = new ProjectNameMenuController();
-
-
-

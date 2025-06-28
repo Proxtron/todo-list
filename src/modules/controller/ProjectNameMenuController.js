@@ -130,6 +130,8 @@ export default class ProjectNameMenuController {
                     const newProject = this.projectCollection.addProject(newProjectName);
 
                     this.projectCollection.selectedProject = newProject;
+                    this.updateDisplayedTodoList();
+
                     document.documentElement.style.setProperty("--title-display-icon", "var(--edit-url)");
                     this.render();           
                 } catch(error) {
